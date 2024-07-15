@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package grpcServer;
+option go_package = "/monitoringServer";
+
+service Monitoring {
+    rpc GetMonitoringData (MonitoringDataRequest) returns (MonitoringDataResponse) {}
+}
+
+message MonitoringDataRequest {
+    repeated string metric = 1;
+}
+
+message MonitoringData {
+    string metric=1;
+    double usage=2;
+}
+
+message MonitoringDataResponse{
+    repeated MonitoringData monitoringData=1;
+}
