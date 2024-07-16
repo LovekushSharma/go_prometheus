@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package grpcServer;
-option go_package = "/monitoringServer";
+option go_package = "/monitorGrpc";
 
 service Monitoring {
     rpc GetMonitoringData (MonitoringDataRequest) returns (MonitoringDataResponse) {}

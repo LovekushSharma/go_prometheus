@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v5.27.2
-// source: monitoringServer.proto
+// source: monitorGrpc.proto
 
-package monitoringServer
+package monitorGrpc
 
 import (
 	context "context"
@@ -101,5 +101,5 @@ var Monitoring_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "monitoringServer.proto",
+	Metadata: "monitorGrpc.proto",
 }

@@ -2,8 +2,12 @@ package monitoring
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"io/ioutil"
+	"log"
+	"os"
 	datatypes "prom/dataTypes"
 	"time"
 
@@ -21,9 +25,23 @@ type monitoringClient struct {
 	prometheusClient prometheusClientApi.Client
 }
 
+func getPrometheusAddress() string {
+	configFile, err := os.Open("../config.json")
+	if err != nil {
+		log.Fatalf("unable to get server port: %s", err)
+	}
+	defer configFile.Close()
+	byteValue, _ := ioutil.ReadAll(configFile)
+
+	var result map[string]interface{}
+	json.Unmarshal([]byte(byteValue), &result)
+
+	return result["prometheusAddress"].(string)
+}
+
 func NewMonitoringClient() monitoringClient {
 	prometheusCli, err := prometheusClientApi.NewClient(prometheusClientApi.Config{
-		Address: "http://localhost:9090",
+		Address: getPrometheusAddress(),
 	})
 	if err != nil {
 		panic(err)
